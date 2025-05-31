@@ -1,8 +1,9 @@
-'use client';
-// <-- hooks can only be used in client components
-import { trpc } from './trpc/client';
+"use client";
+import { trpc } from "@/utils/trpc";
+
 export function ClientGreeting() {
-  const greeting = trpc.hello.useQuery({ text: 'tomato' });
+  const greeting = trpc.hello.useQuery({ text: "potato" });
+
   if (!greeting.data) return <div>Loading...</div>;
   return <div>{greeting.data.greeting}</div>;
 }

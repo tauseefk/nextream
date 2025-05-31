@@ -1,18 +1,18 @@
-import { Suspense } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
-import { ClientGreeting } from './client-greeting';
-import { trpc } from './trpc/server';
-import { HydrateClient } from './trpc/server';
+import { ClientGreeting } from "./client-greeting";
+import RootLayout from "./layout";
+import { getQueryClient } from "./trpc/server";
+import { trpc } from "@/utils/trpc";
 
 export default async function Home() {
-  void trpc.hello.prefetch({ text: 'potato' });
+  const queryClient = getQueryClient();
+  void queryClient.prefetchQuery({
+    queryKey: ["hello"],
+    queryFn: () => trpc.hello,
+  });
+
   return (
-    <HydrateClient>
-      <ErrorBoundary fallback={<div>Something went wrong</div>}>
-        <Suspense fallback={<div>Loading...</div>}>
-          <ClientGreeting />
-        </Suspense>
-      </ErrorBoundary>
-    </HydrateClient>
+    <RootLayout>
+      <ClientGreeting />
+    </RootLayout>
   );
 }
