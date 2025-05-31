@@ -1,5 +1,5 @@
-import { ClientGreeting } from "./client-greeting";
-import RootLayout from "./layout";
+import { ClientGreeting } from './client-greeting';
+import RootLayout from './layout';
 
 export default async function Home() {
   return (

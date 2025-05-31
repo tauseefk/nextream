@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { baseProcedure, createTRPCRouter } from "../init";
+import { z } from 'zod';
+import { baseProcedure, createTRPCRouter } from '../init';
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -27,7 +27,7 @@ export const appRouter = createTRPCRouter({
       input: { text: string };
     }) {
       for (let i = 0; i < 10; i++) {
-        yield `hello ${input.text}`;
+        yield `hello ${input.text} `;
         await delay(1000);
       }
     }),
