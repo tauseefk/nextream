@@ -10,6 +10,7 @@ export const appRouter = createTRPCRouter({
         text: z.string(),
       }),
     )
+    .output(z.object({ greeting: z.string() }))
     .query((opts) => {
       return {
         greeting: `hello ${opts.input.text}`,
@@ -26,9 +27,9 @@ export const appRouter = createTRPCRouter({
     }: {
       input: { text: string };
     }) {
-      for (let i = 0; i < 10; i++) {
-        yield `hello ${input.text} `;
-        await delay(1000);
+      for (let i = 0; i < 10000; i++) {
+        yield `hello ${input.text} ${i} `;
+        await delay(8);
       }
     }),
 });
